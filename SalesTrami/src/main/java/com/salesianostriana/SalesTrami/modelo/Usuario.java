@@ -5,16 +5,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
 
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class Usuario {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public abstract class Usuario implements UserDetails {
 
     @GeneratedValue
     @Id
@@ -41,7 +47,7 @@ public class Usuario {
     private String direccion;
 
     //IsAccountNonBloqued
-    private Boolean cuentaNoBloqueada;
+    private Boolean cuentaNoBloqueada = false;
 
     public Usuario(long id, String nombre, String apellido1, String apellido2, String email, LocalDate fechaNacimiento, String username, String numeroTelefono, String direccion) {
         this.id = id;
@@ -53,5 +59,25 @@ public class Usuario {
         this.username = username;
         this.numeroTelefono = numeroTelefono;
         this.direccion = direccion;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return cuentaNoBloqueada;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

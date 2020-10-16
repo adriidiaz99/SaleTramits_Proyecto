@@ -6,6 +6,7 @@ import com.salesianostriana.SalesTrami.servicio.BaseService.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioServicio extends BaseServiceImpl<Usuario, Long, UsuarioRepositorio> {
@@ -15,8 +16,7 @@ public class UsuarioServicio extends BaseServiceImpl<Usuario, Long, UsuarioRepos
         super(repo);
     }
 
-    @Override
-    public List<Usuario> findAll() {
-        return this.repositorio.findAll();
+    public Optional buscarUsuarioPorUsername(String username){
+        return repositorio.findFirstByUsername(username);
     }
 }

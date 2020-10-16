@@ -1,13 +1,12 @@
 package com.salesianostriana.SalesTrami.modelo;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,6 +18,11 @@ public class Asignatura {
     @GeneratedValue
     @Id
     private long id;
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @ManyToMany(mappedBy="asignaturas")
+    private List<Alumno> alumnos;
 
     private String nombre;
 

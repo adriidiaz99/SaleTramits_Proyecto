@@ -5,9 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -23,5 +23,10 @@ public class Curso {
     private String nombre;
 
     private String descripcion;
+
+    @OneToMany
+    private List<Alumno> alumnos = new ArrayList<Alumno>();
+
+    
 
 }
