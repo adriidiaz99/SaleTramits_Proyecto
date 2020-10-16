@@ -1,9 +1,6 @@
 package com.salesianostriana.SalesTrami.modelo;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -17,11 +14,20 @@ import java.util.List;
 @Data
 @Builder
 @NoArgsConstructor
-@RequiredArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Alumno extends Usuario{
 
     @ManyToOne
     private Curso curso;
+
+    //NO HELPER
+    @OneToMany
+    private List<SolicitudAmpliacionMatricula> solicitudesMatricula;
+
+    //NO HELPER
+    @OneToMany
+    private List<SituacionExcepcional> situacionesExc;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

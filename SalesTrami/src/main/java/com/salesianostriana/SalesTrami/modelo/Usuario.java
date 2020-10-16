@@ -1,9 +1,6 @@
 package com.salesianostriana.SalesTrami.modelo;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,9 +13,8 @@ import java.util.Collections;
 
 @Entity
 @Data
-@Builder
+@AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Usuario implements UserDetails {
 

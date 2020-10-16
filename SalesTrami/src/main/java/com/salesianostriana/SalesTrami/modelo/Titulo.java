@@ -1,19 +1,16 @@
 package com.salesianostriana.SalesTrami.modelo;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class Titulo {
 
     @GeneratedValue
@@ -24,5 +21,6 @@ public class Titulo {
 
     private String descripcion;
 
-
+    @OneToMany(mappedBy="titulo", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Curso> cursosTitulo = new ArrayList<Curso>();
 }

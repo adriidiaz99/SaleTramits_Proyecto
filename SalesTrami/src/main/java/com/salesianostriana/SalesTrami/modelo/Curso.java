@@ -1,9 +1,6 @@
 package com.salesianostriana.SalesTrami.modelo;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,9 +8,9 @@ import java.util.List;
 
 @Entity
 @Data
-@Builder
+@AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
+@Builder
 public class Curso {
 
     @GeneratedValue
@@ -27,6 +24,10 @@ public class Curso {
     @OneToMany
     private List<Alumno> alumnos = new ArrayList<Alumno>();
 
-    
+    @OneToMany
+    private List<Asignatura> asignaturasCurso = new ArrayList<Asignatura>();
+
+    @ManyToOne
+    private Titulo titulo;
 
 }

@@ -1,26 +1,33 @@
 package com.salesianostriana.SalesTrami.modelo;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Data
 @Builder
+@AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
 public class SituacionExcepcional {
 
-    @GeneratedValue
-    @Id
-    private long id;
+    //CLAVE PRIMARIA COMPUESTA
+    @EmbeddedId
+    private SolicitudPk id;
+
+    //CON ESTO HACEMOS REFERENCIA A ELLA
+    @ManyToOne
+    @MapsId("alumno_id")
+    @JoinColumn(name="alumno_id")
+    private Alumno alumno;
+
+    //CON ESTO HACEMOS REFERENCIA A ELLA
+    @ManyToOne
+    @MapsId("asignatura_id")
+    @JoinColumn(name="asignatura_id")
+    private Asignatura asignatura;
 
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private LocalDate fechaSolicitud;
