@@ -13,7 +13,7 @@ import java.util.List;
 @Builder
 public class Curso {
 
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private long id;
 

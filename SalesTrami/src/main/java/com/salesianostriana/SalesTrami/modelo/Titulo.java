@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Titulo {
 
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private long id;
 

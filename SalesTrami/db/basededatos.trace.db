@@ -1,0 +1,4 @@
+2020-10-19 13:30:28 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "SOLIALUMNO" no encontrada
+Table "SOLIALUMNO" not found; SQL statement:
+SELECT * FROM SOLIALUMNO [42102-200]

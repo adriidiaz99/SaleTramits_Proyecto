@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Asignatura {
 
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private long id;
 
@@ -30,7 +30,7 @@ public class Asignatura {
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @ManyToMany(mappedBy="asignaturas")
+    @ManyToMany
     private List<Alumno> alumnos;
 
 

@@ -15,10 +15,10 @@ import java.util.Collections;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Usuario implements UserDetails {
 
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private long id;
     private String nombre;
@@ -45,14 +45,27 @@ public abstract class Usuario implements UserDetails {
     //IsAccountNonBloqued
     private Boolean cuentaNoBloqueada = false;
 
-    public Usuario(long id, String nombre, String apellido1, String apellido2, String email, LocalDate fechaNacimiento, String username, String numeroTelefono, String direccion) {
-        this.id = id;
+    public Usuario(String nombre, String apellido1, String apellido2, String email, LocalDate fechaNacimiento, String username, String password, String numeroTelefono, String direccion, Boolean cuentaNoBloqueada) {
         this.nombre = nombre;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;
         this.email = email;
         this.fechaNacimiento = fechaNacimiento;
         this.username = username;
+        this.password = password;
+        this.numeroTelefono = numeroTelefono;
+        this.direccion = direccion;
+        this.cuentaNoBloqueada = cuentaNoBloqueada;
+    }
+
+    public Usuario(String nombre, String apellido1, String apellido2, String email, LocalDate fechaNacimiento, String username, String password, String numeroTelefono, String direccion) {
+        this.nombre = nombre;
+        this.apellido1 = apellido1;
+        this.apellido2 = apellido2;
+        this.email = email;
+        this.fechaNacimiento = fechaNacimiento;
+        this.username = username;
+        this.password = password;
         this.numeroTelefono = numeroTelefono;
         this.direccion = direccion;
     }
