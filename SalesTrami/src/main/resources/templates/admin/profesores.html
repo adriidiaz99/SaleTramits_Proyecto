@@ -43,7 +43,7 @@
     <ul class="navbar-nav bg-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center sticky-top" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center sticky-top" th:href="@{../titulos/}">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -76,9 +76,9 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Componentes:</h6>
-            <a class="collapse-item" href="../buttons.html">Títulos</a>
-            <a class="collapse-item" href="../cards.html">Cursos</a>
-            <a class="collapse-item" href="../cards.html">Asignaturas</a>
+            <a class="collapse-item" th:href="@{../titulos/}">Títulos</a>
+            <a class="collapse-item" th:href="@{../cursos/}">Cursos</a>
+            <a class="collapse-item" th:href="@{../asignaturas/}">Asignaturas</a>
           </div>
         </div>
       </li>
@@ -92,8 +92,8 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Tipos de usuarios:</h6>
-            <a class="collapse-item border-left-primary" href="" > Profesores</a>
-            <a class="collapse-item" href="../utilities-border.html">Alumnos</a>
+            <a class="collapse-item border-left-primary" th:href="@{../profesores/}">Profesores</a>
+            <a class="collapse-item" th:href="@{../alumnos/}">Alumnos</a>
           </div>
         </div>
       </li>
@@ -107,8 +107,8 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Tipos de solicitudes:</h6>
-            <a class="collapse-item" href="login.html">Ampliación de Matrículas</a>
-            <a class="collapse-item" href="register.html">Situaciones excepcionales</a>
+            <a class="collapse-item" th:href="@{../aumento-matriculas/}">Ampliación de Matrículas</a>
+            <a class="collapse-item"th:href="@{../convalidaciones/}">Situaciones excepcionales</a>
           </div>
         </div>
       </li>

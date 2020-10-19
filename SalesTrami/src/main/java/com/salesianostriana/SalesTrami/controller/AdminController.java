@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin/")
 public class AdminController {
 
-    @GetMapping("/")
+    @GetMapping("/titulos/")
     public String titulos(){
         return "./admin/index";
     }
@@ -35,7 +35,7 @@ public class AdminController {
 
     @GetMapping("/convalidaciones/")
     public String convalidadas(){
-        return "./admin/solicitudesConvalidadas";
+        return "./admin/solicitudesConvalidada";
     }
 
     @GetMapping("/aumento-matriculas/")
