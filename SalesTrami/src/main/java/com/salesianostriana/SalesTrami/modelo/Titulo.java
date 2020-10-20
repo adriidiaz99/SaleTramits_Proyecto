@@ -21,6 +21,21 @@ public class Titulo {
 
     private String descripcion;
 
-    @OneToMany(mappedBy="titulo", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Curso> cursosTitulo = new ArrayList<Curso>();
+    @OneToMany(mappedBy="titulo", cascade = CascadeType.ALL)
+    private List<Curso> cursosTitulo = new ArrayList<>();
+
+    public Titulo(String nombre, String descripcion) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+
+    public void addCurso(Curso a) {
+        this.cursosTitulo.add(a);
+        a.setTitulo(this);
+    }
+
+    public void removeCurso(Curso a) {
+        this.cursosTitulo.remove(a);
+        a.setTitulo(null);
+    }
 }

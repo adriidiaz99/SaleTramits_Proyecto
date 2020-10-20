@@ -33,7 +33,7 @@ public abstract class Usuario implements UserDetails {
     @Column(unique = true)
     private String username;
 
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaNacimiento;
 
     private String password;

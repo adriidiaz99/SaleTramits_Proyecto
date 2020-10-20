@@ -3,6 +3,7 @@ package com.salesianostriana.SalesTrami.modelo;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,17 +22,20 @@ public class Asignatura {
     private String descripcion;
 
     //NO HELPER
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "asignatura")
     private List<SolicitudAmpliacionMatricula> solicitudesMatricula;
 
     //NO HELPER
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "asignatura")
     private List<SituacionExcepcional> situacionesExc;
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @ManyToMany
-    private List<Alumno> alumnos;
+    @ManyToOne
+    private Curso curso;
 
-
+    public Asignatura(String nombre, String descripcion) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
 }

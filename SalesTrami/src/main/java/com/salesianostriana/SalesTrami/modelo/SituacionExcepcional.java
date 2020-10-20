@@ -29,14 +29,14 @@ public class SituacionExcepcional {
     @JoinColumn(name="asignatura_id")
     private Asignatura asignatura;
 
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaSolicitud;
 
     private String tipo;
 
     private String adjunto;
 
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaResolucion;
 
     private String estado;

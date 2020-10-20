@@ -29,10 +29,10 @@ public class SolicitudAmpliacionMatricula {
     @JoinColumn(name="asignatura_id")
     private Asignatura asignatura;
 
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaSolicitud;
 
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaResolucion;
 
     private String estado;

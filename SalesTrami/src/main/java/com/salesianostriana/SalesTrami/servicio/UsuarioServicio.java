@@ -1,5 +1,6 @@
 package com.salesianostriana.SalesTrami.servicio;
 
+import com.salesianostriana.SalesTrami.modelo.Alumno;
 import com.salesianostriana.SalesTrami.modelo.Usuario;
 import com.salesianostriana.SalesTrami.repositorio.UsuarioRepositorio;
 import com.salesianostriana.SalesTrami.servicio.BaseService.BaseServiceImpl;
@@ -20,6 +21,8 @@ public class UsuarioServicio extends BaseServiceImpl<Usuario, Long, UsuarioRepos
     public Optional buscarUsuarioPorUsername(String username){
         return repositorio.findFirstByUsername(username);
     }
+
+    public List<Alumno> buscarTodosLosAlumnos(){ return repositorio.encontrarUsuariosAlumnos();}
 
     @Override
     public Usuario save(Usuario usuario) {
