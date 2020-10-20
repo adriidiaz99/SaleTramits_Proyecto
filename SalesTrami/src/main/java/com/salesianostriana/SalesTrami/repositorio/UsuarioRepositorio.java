@@ -1,6 +1,7 @@
 package com.salesianostriana.SalesTrami.repositorio;
 
 import com.salesianostriana.SalesTrami.modelo.Alumno;
+import com.salesianostriana.SalesTrami.modelo.Profesor;
 import com.salesianostriana.SalesTrami.modelo.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,5 +17,8 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
 
     @Query(value = "SELECT * FROM USUARIO JOIN ALUMNO USING (ID)", nativeQuery = true)
     List<Alumno> encontrarUsuariosAlumnos();
+
+    @Query(value = "SELECT * FROM USUARIO JOIN PROFESOR USING (ID)", nativeQuery = true)
+    List<Profesor> encontrarUsuariosProfesores();
 
 }

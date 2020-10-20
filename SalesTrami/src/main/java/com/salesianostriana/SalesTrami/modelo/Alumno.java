@@ -37,4 +37,14 @@ public class Alumno extends Usuario{
         return Collections.singletonList(new SimpleGrantedAuthority("ROLE_ALUMNO"));
     }
 
+    public void addCurso(Curso c){
+        this.setCurso(c);
+        c.getAlumnos().add(this);
+    }
+
+    public void removeCurso(Curso c){
+        this.setCurso(null);
+        c.getAlumnos().remove(this);
+    }
+
 }

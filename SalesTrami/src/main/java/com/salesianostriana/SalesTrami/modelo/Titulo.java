@@ -21,7 +21,7 @@ public class Titulo {
 
     private String descripcion;
 
-    @OneToMany(mappedBy="titulo", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="titulo")
     private List<Curso> cursosTitulo = new ArrayList<>();
 
     public Titulo(String nombre, String descripcion) {
@@ -29,13 +29,13 @@ public class Titulo {
         this.descripcion = descripcion;
     }
 
-    public void addCurso(Curso a) {
-        this.cursosTitulo.add(a);
-        a.setTitulo(this);
+    public void addCurso(Curso c){
+        this.getCursosTitulo().add(c);
+        c.setTitulo(this);
     }
 
-    public void removeCurso(Curso a) {
-        this.cursosTitulo.remove(a);
-        a.setTitulo(null);
+    public void removeCurso(Curso c){
+        this.getCursosTitulo().remove(c);
+        c.setTitulo(null);
     }
 }

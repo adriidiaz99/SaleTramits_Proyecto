@@ -26,7 +26,7 @@ public class Curso {
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "curso")
     private List<Alumno> alumnos = new ArrayList<>();
 
-    @OneToMany(cascade=CascadeType.ALL, mappedBy = "curso")
+    @OneToMany(mappedBy = "curso")
     private List<Asignatura> asignaturasCurso = new ArrayList<>();
 
     @EqualsAndHashCode.Exclude
@@ -39,24 +39,14 @@ public class Curso {
         this.descripcion = descripcion;
     }
 
-    // Métodos helper
-    public void addAsignatura(Asignatura a) {
-        this.asignaturasCurso.add(a);
-        a.setCurso(this);
+    public void addAsignatura(Asignatura a1){
+        this.getAsignaturasCurso().add(a1);
+        a1.setCurso(this);
     }
 
-    public void removeAsignatura(Asignatura a) {
-        this.asignaturasCurso.remove(a);
-        a.setCurso(null);
+    public void removeAsignatura(Asignatura a1){
+        this.getAsignaturasCurso().remove(a1);
+        a1.setCurso(null);
     }
 
-    public void addAlumno(Alumno a) {
-        this.alumnos.add(a);
-        a.setCurso(this);
-    }
-
-    public void removeAlumno(Alumno a) {
-        this.alumnos.remove(a);
-        a.setCurso(null);
-    }
 }

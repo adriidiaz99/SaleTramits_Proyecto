@@ -340,6 +340,10 @@
           <div class="row">
 
             <h1>Profesores</h1>
+            <div id="botonesMisProductos" class="float-left col-10 ml-2 mb-3 pt-3">
+              <a th:href="@{../anyadir-profe/}"><button id="Agregar"
+                  class="bg-primary text-white float-right botonAzul">Agregar</button></a>
+            </div>
 
             <!-- Pie Chart -->
             <div class="col-12">
@@ -353,19 +357,25 @@
                     <th scope="col">Apellido2</th>
                     <th scope="col">Teléfono</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Jefe de estudios</th>
+                    <th scope="col">Bloqueada</th>
+                    <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>mark01</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>ddedqe</td>
-                    <td>cewsfrwe</td>
-                    <td>efqwefrfe</td>
+                  <tr th:each="profe : ${profes}">
+                    <th scope="row" th:text="*{profe.id}">1</th>
+                    <td th:text="*{profe.username}">mark01</td>
+                    <td th:text="*{profe.nombre}">Mark</td>
+                    <td th:text="*{profe.apellido1}">Otto</td>
+                    <td th:text="*{profe.apellido2}">ddedqe</td>
+                    <td th:text="*{profe.numeroTelefono}">cewsfrwe</td>
+                    <td th:text="*{profe.email}">efqwefrfe</td>
+                    <td th:text="${profe.isJefeEstudios} ? 'Si' : 'No'">efqwefrfe</td>
+                    <td th:text="${profe.cuentaNoBloqueada} ? 'Activo' : 'Bloqueado'">efqwefrfe</td>
+                    <td th:class= "${profe.cuentaNoBloqueada} ? d-none : d-block"><button class="bg-danger text-white">Activar</button></td>
                     <td><button>Editar</button></td>
                     <td><button>Eliminar</button></td>
                   </tr>
