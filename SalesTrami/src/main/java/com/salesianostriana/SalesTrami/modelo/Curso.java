@@ -21,6 +21,8 @@ public class Curso {
 
     private String descripcion;
 
+    private Boolean activo = true;
+
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "curso")

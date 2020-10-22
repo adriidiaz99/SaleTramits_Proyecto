@@ -18,7 +18,6 @@ public class AdminController {
     private final UsuarioServicio usuarioServicio;
     private final TituloServicio tituloServicio;
     private final CursoServicio cursoServicio;
-    private final EmailServiceImpl emailService;
     private final AsignaturaServicio asignaturaServicio;
 
     @GetMapping("/titulos/")
@@ -86,9 +85,8 @@ public class AdminController {
 
         alumno.addCurso(c1);
 
-        emailService.sendMail(alumno.getEmail(), "Bienvenido a SaleTramits", "Su usuario es " +alumno.getUsername() +" y su contraseña " +alumno.getPassword());
+        usuarioServicio.saveSinPassword(alumno);
 
-        usuarioServicio.save(alumno);
         System.out.println(usuarioServicio.findAll());
         return "redirect:/admin/alumnos/";
     }
@@ -141,35 +139,28 @@ public class AdminController {
         return "redirect:/admin/asignaturas/";
     }
 
-    @GetMapping("/eliminar-titulo/{id}")
-    public String eliminarTitulo(@PathVariable long id){
+    @GetMapping("/baja-titulo/{id}")
+    public String darDeBajaTitulo(@PathVariable long id){
 
         Titulo t1 = tituloServicio.findById(id);
 
         for(Curso c1 : t1.getCursosTitulo()){
 
-            for(Asignatura a1 : c1.getAsignaturasCurso()){
-                a1.setCurso(null);
-            }
+            c1.setActivo(false);
 
-            cursoServicio.delete(c1);
         }
 
-        tituloServicio.delete(t1);
+        tituloServicio.findById(t1.getId()).setActivo(false);
 
         return "redirect:/admin/titulos/";
     }
 
-    @GetMapping("/eliminar-curso/{id}")
-    public String eliminarCurso(@PathVariable long id){
+    @GetMapping("/baja-curso/{id}")
+    public String darDeBajaCurso(@PathVariable long id){
 
         Curso c1 = cursoServicio.findById(id);
 
-        for(Asignatura a1 : c1.getAsignaturasCurso()){
-            a1.setCurso(null);
-        }
-
-        cursoServicio.delete(c1);
+        cursoServicio.findById(c1.getId()).setActivo(false);
 
         return "redirect:/admin/cursos/";
     }

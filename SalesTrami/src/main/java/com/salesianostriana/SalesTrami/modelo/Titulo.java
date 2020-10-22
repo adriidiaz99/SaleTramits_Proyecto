@@ -21,6 +21,8 @@ public class Titulo {
 
     private String descripcion;
 
+    private Boolean activo = true;
+
     @OneToMany(mappedBy="titulo")
     private List<Curso> cursosTitulo = new ArrayList<>();
 

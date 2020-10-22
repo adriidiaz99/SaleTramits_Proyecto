@@ -17,8 +17,8 @@ public class EmailConfig
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(25);
 
-        mailSender.setUsername("admin@gmail.com");
-        mailSender.setPassword("password");
+        mailSender.setUsername("adriandiazs1999@gmail.com");
+        mailSender.setPassword("Laser999");
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
@@ -29,13 +29,4 @@ public class EmailConfig
         return mailSender;
     }
 
-    @Bean
-    public SimpleMailMessage emailTemplate()
-    {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo("somebody@gmail.com");
-        message.setFrom("admin@gmail.com");
-        message.setText("FATAL - Application crash. Save your job !!");
-        return message;
-    }
 }
