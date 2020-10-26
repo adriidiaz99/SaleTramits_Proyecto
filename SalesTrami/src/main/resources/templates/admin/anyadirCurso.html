@@ -353,6 +353,10 @@
                     <div class="alCentro">
                         <form th:object="${curso}" method="POST" enctype="multipart/form-data"
                             th:action="${curso.id} == 0 ? @{/admin/anyadir-curso/submit} : @{/admin/editar-curso/submit}">
+
+                            <input type="number" th:field="*{id}" class="form-control invisible" id="id"
+                                   placeholder="Id del curso" >
+
                             <div class="form-group">
                                 <label for="nombre">Nombre:</label>
                                 <input type="text" class="form-control" id="nombre" th:field="*{nombre}"
@@ -360,7 +364,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="descripcion">Descripción:</label>
-                                <input type="text" th:field="*{descripcion}" class="form-control" id="apellido1"
+                                <input type="text" th:field="*{descripcion}" class="form-control" id="descripcion"
                                     placeholder="Primer apellido del profesor">
                             </div>
                             <div class="form-group">

@@ -354,6 +354,7 @@
                     <th scope="col">Nombre</th>
                     <th scope="col">Descripción</th>
                     <th scope="col">Título</th>
+                    <th scope="col">Activo</th>
                     <th scope="col">Asignaturas</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
@@ -366,9 +367,12 @@
                     <td th:text="${curso.descripcion}">Otto</td>
                     <td th:if="${curso.titulo} == null">Sin especificar</td>
                     <td th:unless="${curso.titulo} == null" th:text="${curso.titulo.nombre}">Sin especificar</td>
+                    <td th:text="${curso.activo} ? 'Activo' : 'De baja'">efqwefrfe</td>
                     <td><a><button>Ver</button></a></td>
-                    <td><button>Editar</button></td>
-                    <td><a th:href="@{../eliminar-curso/{id}(id = ${curso.id})}"><button>Eliminar</button></a></td>
+                    <td><a th:href="@{../editar-curso/{id}(id = ${curso.id})}"><button>Editar</button></a></td>
+                    <td th:if="${curso.activo}"><a th:href="@{../baja-curso/{id}(id = ${curso.id})}"><button>Dar baja</button></a></td>
+                    <td th:if="${curso.activo} == false and ${curso.titulo.activo}"><a th:href="@{../activar-curso/{id}(id = ${curso.id})}"><button>Activar</button></a></td>
+                    <td th:unless="${curso.activo} == false and ${curso.titulo.activo}"></td>
                   </tr>
                 </tbody>
               </table>

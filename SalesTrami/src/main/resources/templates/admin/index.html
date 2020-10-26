@@ -353,6 +353,7 @@
                     <th scope="col">Id</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Descripción</th>
+                    <th scope="col">Activo</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                   </tr>
@@ -362,8 +363,10 @@
                     <th scope="row" th:text="${titulo.id}">1</th>
                     <td th:text="${titulo.nombre}">Mark</td>
                     <td th:text="${titulo.descripcion}">Otto</td>
+                    <td th:text="${titulo.activo} ? 'Activo' : 'De baja'">efqwefrfe</td>
                     <td><a th:href="@{../editar-titulo/{id}(id = ${titulo.id})}"><button>Editar</button></a></td>
-                    <td><a th:href="@{../eliminar-titulo/{id}(id = ${titulo.id})}"><button>Eliminar</button></a></td>
+                    <td th:if="${titulo.activo}"><a th:href="@{../baja-titulo/{id}(id = ${titulo.id})}"><button>Dar baja</button></a></td>
+                    <td th:unless="${titulo.activo}"><a th:href="@{../activar-titulo/{id}(id = ${titulo.id})}"><button>Activar</button></a></td>
                   </tr>
                 </tbody>
               </table>

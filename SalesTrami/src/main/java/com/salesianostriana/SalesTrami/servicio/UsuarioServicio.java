@@ -9,15 +9,20 @@ import com.salesianostriana.SalesTrami.utiles.RandomString;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 public class UsuarioServicio extends BaseServiceImpl<Usuario, Long, UsuarioRepositorio> {
+
+    @Autowired
+    EmailServiceImpl emailService;
 
     private RandomString gen = new RandomString(8, ThreadLocalRandom.current());
 
@@ -43,11 +48,25 @@ public class UsuarioServicio extends BaseServiceImpl<Usuario, Long, UsuarioRepos
         return super.save(usuario);
     }
 
+    public String generarPasswRandom(){
+
+        int leftLimit = 50; // letter 'a'
+        int rightLimit = 160; // letter 'z'
+        int targetStringLength = 9;
+        Random random = new Random();
+
+        String generatedString = random.ints(leftLimit, rightLimit + 1)
+                .limit(targetStringLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+
+        return generatedString;
+    }
+
     public Usuario saveSinPassword(Usuario usuario) {
         BCryptPasswordEncoder b1 = new BCryptPasswordEncoder();
-        EmailServiceImpl emailService = new EmailServiceImpl();
 
-        String codified = gen.nextString();
+        String codified = generarPasswRandom();
 
         emailService.sendMail(usuario.getEmail(), "Bienvenido a SaleTramits", "Su usuario es " +usuario.getUsername() +" y su contraseña " +codified);
 

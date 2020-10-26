@@ -353,6 +353,9 @@
                     <div class="alCentro">
                         <form th:object="${alumno}" method="POST" enctype="multipart/form-data"
                             th:action="${alumno.id} == 0 ? @{/admin/anyadir-alumno/submit} : @{/admin/editar-alumno/submit}">
+
+                            <input type="number" th:field="*{id}" class="invisible">
+
                             <div class="form-group">
                                 <label for="nombre">Nombre:</label>
                                 <input type="text" class="form-control" id="nombre" th:field="*{nombre}"

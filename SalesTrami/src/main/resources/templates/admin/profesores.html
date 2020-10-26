@@ -375,9 +375,9 @@
                     <td th:text="*{profe.email}">efqwefrfe</td>
                     <td th:text="${profe.isJefeEstudios} ? 'Si' : 'No'">efqwefrfe</td>
                     <td th:text="${profe.cuentaNoBloqueada} ? 'Activo' : 'Bloqueado'">efqwefrfe</td>
-                    <td th:class= "${profe.cuentaNoBloqueada} ? d-none : d-block"><button class="bg-danger text-white">Activar</button></td>
-                    <td><button>Editar</button></td>
-                    <td><button>Eliminar</button></td>
+                    <td><a th:href="@{../editar-profesor/{id}(id = ${profe.id})}"><button>Editar</button></a></td>
+                    <td th:if="${profe.cuentaNoBloqueada}"><a th:href="@{../baja-profesor/{id}(id = ${profe.id})}"><button>Dar baja</button></a></td>
+                    <td th:unless="${profe.cuentaNoBloqueada}"><a th:href="@{../activar-profesor/{id}(id = ${profe.id})}"><button>Activar</button></a></td>
                   </tr>
                 </tbody>
               </table>

@@ -352,7 +352,10 @@
 
                     <div class="alCentro">
                         <form th:object="${profe}" method="POST" enctype="multipart/form-data"
-                            th:action="${profe.id} == 0 ? @{/admin/anyadir-profe/submit} : @{/admin/editar-profe/submit}">
+                            th:action="${profe.id} == 0 ? @{/admin/anyadir-profe/submit} : @{/admin/editar-profesor/submit}">
+
+                            <input type="number" th:field="*{id}" class="invisible">
+
                             <div class="form-group">
                                 <label for="nombre">Nombre:</label>
                                 <input type="text" class="form-control" id="nombre" th:field="*{nombre}"
@@ -382,11 +385,6 @@
                                 <label for="fNacimiento">Fecha de nacimiento:</label>
                                 <input type="date" th:field="*{fechaNacimiento}" class="form-control" id="fNacimiento"
                                     placeholder="Fecha de nacimiento del profesor">
-                            </div>
-                            <div class="form-group">
-                                <label for="passw">Contraseña:</label>
-                                <input type="password" th:field="*{password}" class="form-control" id="passw"
-                                    placeholder="Contraseña del profesor">
                             </div>
                             <div class="form-group">
                                 <label for="telefono">Teléfono:</label>

@@ -354,6 +354,7 @@
                     <th scope="col">Nombre</th>
                     <th scope="col">Descripción</th>
                     <th scope="col">Curso</th>
+                    <th scope="col">Estado</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                   </tr>
@@ -364,8 +365,10 @@
                     <td th:text="${asignatura.nombre}">Mark</td>
                     <td th:text="${asignatura.descripcion}">Otto</td>
                     <td th:text="${asignatura.curso} == null ? 'Sin curso' : ${asignatura.curso.nombre}">2º</td>
-                    <td><button>Editar</button></td>
-                    <td><button>Eliminar</button></td>
+                    <td th:text="${asignatura.activo} ? 'Activo' : 'De baja'">efqwefrfe</td>
+                    <td><a th:href="@{../editar-asignatura/{id}(id = ${asignatura.id})}"><button>Editar</button></a></td>
+                    <td th:if="${asignatura.activo}"><a th:href="@{../baja-asignatura/{id}(id = ${asignatura.id})}"><button>Dar baja</button></a></td>
+                    <td th:unless="${asignatura.activo}"><a th:href="@{../activar-asignatura/{id}(id = ${asignatura.id})}"><button>Activar</button></a></td>
                   </tr>
                 </tbody>
               </table>
