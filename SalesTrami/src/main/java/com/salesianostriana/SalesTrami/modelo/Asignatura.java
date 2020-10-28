@@ -34,6 +34,11 @@ public class Asignatura {
     @ManyToOne
     private Curso curso;
 
+    @ManyToMany
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private List<Horario> horarios;
+
     private Boolean activo = true;
 
     public Asignatura(String nombre, String descripcion) {

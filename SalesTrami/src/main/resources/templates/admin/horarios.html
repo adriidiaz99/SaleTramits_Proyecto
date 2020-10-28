@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Admin - Profesores</title>
+  <title>Admin - Cursos</title>
 
   <!-- Custom fonts for this template-->
   <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -74,10 +74,10 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Componentes:</h6>
-            <a class="collapse-item" th:href="@{../titulos/}">Títulos</a>
+            <a class="collapse-item " th:href="@{../titulos/}">Títulos</a>
             <a class="collapse-item" th:href="@{../cursos/}">Cursos</a>
             <a class="collapse-item" th:href="@{../asignaturas/}">Asignaturas</a>
-            <a class="collapse-item" th:href="@{../horarios/}">Horarios</a>
+            <a class="collapse-item border-left-primary" th:href="@{../horarios/}">Horarios</a>
           </div>
         </div>
       </li>
@@ -92,7 +92,7 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Tipos de usuarios:</h6>
-            <a class="collapse-item border-left-primary" th:href="@{../profesores/}">Profesores</a>
+            <a class="collapse-item" th:href="@{../profesores/}">Profesores</a>
             <a class="collapse-item" th:href="@{../alumnos/}">Alumnos</a>
           </div>
         </div>
@@ -340,9 +340,9 @@
 
           <div class="row">
 
-            <h1>Profesores</h1>
+            <h1>Horarios</h1>
             <div id="botonesMisProductos" class="float-left col-10 ml-2 mb-3 pt-3">
-              <a th:href="@{../anyadir-profe/}"><button id="Agregar"
+              <a th:href="@{../anyadir-horario/}"><button id="Agregar"
                   class="bg-primary text-white float-right botonAzul">Agregar</button></a>
             </div>
 
@@ -352,33 +352,22 @@
                 <thead class="thead-dark">
                   <tr class="col-12">
                     <th scope="col">Id</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido1</th>
-                    <th scope="col">Apellido2</th>
-                    <th scope="col">Teléfono</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Jefe de estudios</th>
-                    <th scope="col">Bloqueada</th>
-                    <th scope="col"></th>
+                    <th scope="col">Curso</th>
+                    <th scope="col">Activo</th>
+                    <th scope="col">Visualizar horario</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr th:each="profe : ${profes}">
-                    <th scope="row" th:text="*{profe.id}">1</th>
-                    <td th:text="*{profe.username}">mark01</td>
-                    <td th:text="*{profe.nombre}">Mark</td>
-                    <td th:text="*{profe.apellido1}">Otto</td>
-                    <td th:text="*{profe.apellido2}">ddedqe</td>
-                    <td th:text="*{profe.numeroTelefono}">cewsfrwe</td>
-                    <td th:text="*{profe.email}">efqwefrfe</td>
-                    <td th:text="${profe.isJefeEstudios} ? 'Si' : 'No'">efqwefrfe</td>
-                    <td th:text="${profe.cuentaNoBloqueada} ? 'Activo' : 'Bloqueado'">efqwefrfe</td>
-                    <td><a th:href="@{../editar-profesor/{id}(id = ${profe.id})}"><button>Editar</button></a></td>
-                    <td th:if="${profe.cuentaNoBloqueada}"><a th:href="@{../baja-profesor/{id}(id = ${profe.id})}"><button>Dar baja</button></a></td>
-                    <td th:unless="${profe.cuentaNoBloqueada}"><a th:href="@{../activar-profesor/{id}(id = ${profe.id})}"><button>Activar</button></a></td>
+                  <tr th:each="calendario : ${calendarios}">
+                    <th scope="row" th:text="${calendario.id}">1</th>
+                    <td th:if="${calendario.curso} == null">Sin especificar</td>
+                    <td th:unless="${calendario.curso} == null" th:text="${calendario.curso.nombre}">Sin especificar</td>
+                    <td th:text="${calendario.activo} ? 'Horario activo' : 'Curso no activo'">efqwefrfe</td>
+                    <td><a><button>Ver</button></a></td>
+                    <td><a th:href="@{../editar-horario/{id}(id = ${calendario.id})}"><button>Editar</button></a></td>
+                    <td><a th:href="@{../eliminar-horario/{id}(id = ${calendario.id})}"><button>Eliminar horario</button></a></td>
                   </tr>
                 </tbody>
               </table>
@@ -389,6 +378,7 @@
 
         </div>
         <!-- End of Main Content -->
+
         <footer class="sticky-footer bg-white w-100">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
@@ -396,7 +386,6 @@
             </div>
           </div>
         </footer>
-
         <!-- End of Footer -->
 
       </div>
@@ -446,6 +435,7 @@
     <!-- Page level custom scripts -->
     <script src="../../js/demo/chart-area-demo.js"></script>
     <script src="../../js/demo/chart-pie-demo.js"></script>
+
 </body>
 
 </html>

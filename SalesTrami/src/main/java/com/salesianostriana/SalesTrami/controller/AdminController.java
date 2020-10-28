@@ -19,11 +19,18 @@ public class AdminController {
     private final TituloServicio tituloServicio;
     private final CursoServicio cursoServicio;
     private final AsignaturaServicio asignaturaServicio;
+    private final CalendarioServicio calendarioServicio;
 
     @GetMapping("/titulos/")
     public String titulos(Model model){
         model.addAttribute("titulos", tituloServicio.findAll());
         return "./admin/index";
+    }
+
+    @GetMapping("/horarios/")
+    public String horarios(Model model){
+        model.addAttribute("horarios", calendarioServicio.findAll());
+        return "./admin/horarios";
     }
 
     @GetMapping("/profesores/")
@@ -67,6 +74,13 @@ public class AdminController {
         return "./admin/anyadirAlumno";
     }
 
+    @GetMapping("/anyadir-horario/")
+    public String anyadirHorario(Model model){
+        model.addAttribute("cursos", cursoServicio.encontrarActivos());
+        model.addAttribute("calendario", new Calendario());
+        return "./admin/anyadirHorario";
+    }
+
     @GetMapping("/anyadir-profe/")
     public String anyadirProfe(Model model){
         model.addAttribute("profe", new Profesor());
@@ -89,6 +103,25 @@ public class AdminController {
 
         System.out.println(usuarioServicio.findAll());
         return "redirect:/admin/alumnos/";
+    }
+
+    @PostMapping("/anyadir-horario/submit")
+    public String anyadirHorarioPost(@ModelAttribute Calendario calendario){
+
+        calendario.addCurso(calendario.getCurso());
+
+        calendarioServicio.save(calendario);
+
+        cursoServicio.edit(calendario.getCurso());
+
+        return "redirect:/admin/completar-horario/";
+    }
+
+    @GetMapping("/completar-horario/")
+    public String completarHorario(Model model){
+        model.addAttribute("cursos", cursoServicio.encontrarActivos());
+        model.addAttribute("calendario", new Calendario());
+        return "./admin/anyadirHorario";
     }
 
     @PostMapping("/anyadir-profe/submit")

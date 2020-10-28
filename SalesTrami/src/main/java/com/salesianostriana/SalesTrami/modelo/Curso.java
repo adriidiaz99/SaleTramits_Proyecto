@@ -36,6 +36,9 @@ public class Curso {
     @ManyToOne
     private Titulo titulo;
 
+    @OneToOne
+    private Calendario calendario;
+
     public Curso(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;

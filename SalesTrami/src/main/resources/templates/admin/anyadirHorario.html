@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin - Añadir alumno</title>
+    <title>Admin - Añadir curso</title>
 
     <!-- Custom fonts for this template-->
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -76,10 +76,10 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Componentes:</h6>
-                        <a class="collapse-item border-left-primary" th:href="@{../titulos/}">Títulos</a>
+                        <a class="collapse-item" th:href="@{../titulos/}">Títulos</a>
                         <a class="collapse-item" th:href="@{../cursos/}">Cursos</a>
                         <a class="collapse-item" th:href="@{../asignaturas/}">Asignaturas</a>
-                        <a class="collapse-item" th:href="@{../horarios/}">Horarios</a>
+                        <a class="collapse-item border-left-primary" th:href="@{../horarios/}">Horarios</a>
                     </div>
                 </div>
             </li>
@@ -352,24 +352,26 @@
                     <h1>Añadir título</h1>
 
                     <div class="alCentro">
-                        <form th:object="${titulo}" method="POST" enctype="multipart/form-data"
-                            th:action="${titulo.id} == 0 ? @{/admin/anyadir-titulo/submit} : @{/admin/editar-titulo/submit}">
+                        <form th:object="${calendario}" method="POST" enctype="multipart/form-data"
+                            th:action="${calendario.id} == 0 ? @{/admin/anyadir-horario/submit} : @{/admin/editar-horario/submit}">
 
                             <input type="number" th:field="*{id}" class="form-control invisible" id="id"
-                                   placeholder="Id del titulo" >
+                                   placeholder="Id del horario" >
 
-                            <div class="form-group">
-                                <label for="nombre">Nombre:</label>
-                                <input type="text" class="form-control" id="nombre" th:field="*{nombre}"
-                                    placeholder="Nombre del titulo">
-                            </div>
                             <div class="form-group">
                                 <label for="descripcion">Descripción:</label>
                                 <input type="text" th:field="*{descripcion}" class="form-control" id="descripcion"
-                                    placeholder="Descripcion del titulo">
+                                       placeholder="Primer apellido del profesor">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="curso">Curso:</label>
+                                <select name="curso" id="curso" th:field="*{curso.id}">
+                                    <option th:each="curso : ${cursos}" th:value="${curso.id}" th:text="${curso.nombre}">Volvo</option>
+                                </select>
                             </div>
                             
-                            <button type="submit" class="btn btn-primary">Agregar</button>
+                            <button type="submit" class="btn btn-primary">Agregar</button>  
                         </form>
 
                     </div>
