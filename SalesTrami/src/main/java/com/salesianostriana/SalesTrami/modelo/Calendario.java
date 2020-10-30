@@ -25,16 +25,18 @@ public class Calendario {
     @OneToMany(mappedBy = "calendario")
     private List<Horario> semana = new ArrayList<>();
 
+    private boolean activo = true;
+
     //Helper
 
-    public void addCurso(Curso curso){
-        setCurso(curso);
-        curso.setCalendario(this);
+    public void addHorario(Horario horario){
+        semana.add(horario);
+        horario.setCalendario(this);
     }
 
-    public void removeCurso(Curso curso){
-        setCurso(null);
-        curso.setCalendario(null);
+    public void removeHorario(Horario horario){
+        semana.remove(horario);
+        horario.setCalendario(null);
     }
 
 }

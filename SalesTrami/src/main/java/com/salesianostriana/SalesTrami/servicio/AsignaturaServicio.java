@@ -37,4 +37,8 @@ public class AsignaturaServicio extends BaseServiceImpl<Asignatura, Long, Asigna
 
         edit(a1);
     }
+
+    public Asignatura encontrarPorNombre(String nombre){
+        return repositorio.findFirstByNombre(nombre).orElseThrow(() -> new NullPointerException());
+    }
 }

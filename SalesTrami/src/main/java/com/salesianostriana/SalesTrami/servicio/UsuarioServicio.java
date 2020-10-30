@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,9 +31,8 @@ public class UsuarioServicio extends BaseServiceImpl<Usuario, Long, UsuarioRepos
         super(repo);
     }
 
-
-    public Optional buscarUsuarioPorUsername(String username){
-        return repositorio.findFirstByUsername(username);
+    public Usuario buscarUsuarioPorUsername(String username){
+        return repositorio.findFirstByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
     }
 
     public List<Alumno> buscarTodosLosAlumnos(){ return repositorio.encontrarUsuariosAlumnos();}
@@ -50,8 +50,8 @@ public class UsuarioServicio extends BaseServiceImpl<Usuario, Long, UsuarioRepos
 
     public String generarPasswRandom(){
 
-        int leftLimit = 50; // letter 'a'
-        int rightLimit = 160; // letter 'z'
+        int leftLimit = 97; // letter 'a'
+        int rightLimit = 122; // letter 'z'
         int targetStringLength = 9;
         Random random = new Random();
 
@@ -68,10 +68,18 @@ public class UsuarioServicio extends BaseServiceImpl<Usuario, Long, UsuarioRepos
 
         String codified = generarPasswRandom();
 
-        emailService.sendMail(usuario.getEmail(), "Bienvenido a SaleTramits", "Su usuario es " +usuario.getUsername() +" y su contraseña " +codified);
+        usuario.setPassword(codified);
 
-        usuario.setPassword(b1.encode(codified));
+        System.out.println(codified);
+        /*emailService.sendMail(usuario.getEmail(), "Bienvenido a SaleTramits", "Su usuario es " +usuario.getUsername() +" y su contraseña " +codified);*/
+
+        usuario.setPassword(b1.encode(usuario.getPassword()));
 
         return super.save(usuario);
+    }
+
+    public void activarUsuario(Usuario usuario){
+        usuario.setCuentaNoBloqueada(true);
+        edit(usuario);
     }
 }

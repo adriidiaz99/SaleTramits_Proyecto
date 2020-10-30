@@ -17,7 +17,6 @@ public class UserDetailImpl implements UserDetailsService {
     @SneakyThrows
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return (UserDetails) usuarioServicio.buscarUsuarioPorUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
+        return (UserDetails) usuarioServicio.buscarUsuarioPorUsername(username);
     }
 }

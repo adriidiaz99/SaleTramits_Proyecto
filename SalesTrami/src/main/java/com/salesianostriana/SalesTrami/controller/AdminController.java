@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -20,6 +21,7 @@ public class AdminController {
     private final CursoServicio cursoServicio;
     private final AsignaturaServicio asignaturaServicio;
     private final CalendarioServicio calendarioServicio;
+    private final HorarioServicio horarioServicio;
 
     @GetMapping("/titulos/")
     public String titulos(Model model){
@@ -29,7 +31,7 @@ public class AdminController {
 
     @GetMapping("/horarios/")
     public String horarios(Model model){
-        model.addAttribute("horarios", calendarioServicio.findAll());
+        model.addAttribute("calendarios", calendarioServicio.findAll());
         return "./admin/horarios";
     }
 
@@ -105,16 +107,61 @@ public class AdminController {
         return "redirect:/admin/alumnos/";
     }
 
+    @GetMapping("/rellenar-horario/{id}")
+    public String rellenarHorario(@PathVariable long id, Model model){
+
+        model.addAttribute("calendario", calendarioServicio.findById(id));
+        model.addAttribute("asignaturas", calendarioServicio.findById(id).getCurso().getAsignaturasCurso());
+
+        return "./admin/diaHorario";
+    }
+
+
     @PostMapping("/anyadir-horario/submit")
     public String anyadirHorarioPost(@ModelAttribute Calendario calendario){
+        /*boolean comprobar = true;
 
-        calendario.addCurso(calendario.getCurso());
+        if(!calendarioServicio.findAll().isEmpty()){
+        for(Calendario calendario1 : calendarioServicio.findAll()){
+            if(calendario.getCurso().equals(calendario1.getCurso()))
+                comprobar = false;
+        }
+        }*/
 
-        calendarioServicio.save(calendario);
+        /*if(comprobar){*/
+            for(int i = 0; i < 6 ; i++){
+                calendario.addHorario(new Horario());
+                for(int j = 0; j < 6; j++){
+                    calendario.getSemana().get(i).addAsignatura(asignaturaServicio.encontrarPorNombre("Hora libre"));
+                }
 
-        cursoServicio.edit(calendario.getCurso());
+                horarioServicio.edit(calendario.getSemana().get(i));
+                asignaturaServicio.edit(asignaturaServicio.encontrarPorNombre("Hora libre"));
+            }
+            calendarioServicio.edit(calendario);
+            System.out.println(calendario);
+        /*}*/
 
-        return "redirect:/admin/completar-horario/";
+        return "redirect:/admin/horarios/";
+    }
+
+
+    @PostMapping("/rellenar-horario/submit")
+    public String anyadirHorarioPostSubmit(@ModelAttribute Calendario calendario){
+
+
+        for(Horario horario : calendario.getSemana()){
+            for(Asignatura a1 : horarioServicio.findById(horario.getId()).getListaAsignaturas()){
+                horario.removeAsignatura(a1);
+                horarioServicio.edit(horario);
+                asignaturaServicio.edit(a1);
+            }
+        }
+
+        System.out.println(calendario);
+        calendarioServicio.edit(calendario);
+
+        return "redirect:/admin/horarios/";
     }
 
     @GetMapping("/completar-horario/")
@@ -184,6 +231,7 @@ public class AdminController {
     public String darDeBajaCurso(@PathVariable long id){
 
         cursoServicio.darDeBajaCurso(cursoServicio.findById(id));
+        calendarioServicio.encontrarCalendarioPorCurso(id).setActivo(false);
 
         return "redirect:/admin/cursos/";
     }
@@ -258,6 +306,7 @@ public class AdminController {
     public String activarCurso(@PathVariable long id){
 
         cursoServicio.activarCurso(cursoServicio.findById(id));
+        calendarioServicio.encontrarCalendarioPorCurso(id).setActivo(true);
 
         return "redirect:/admin/cursos/";
     }
@@ -284,6 +333,15 @@ public class AdminController {
         model.addAttribute("profe", usuarioServicio.findById(id));
 
         return "./admin/anyadirProfe";
+    }
+
+    @GetMapping("/activar-alumno/{id}")
+    public String activarAlumno(@PathVariable long id){
+
+        usuarioServicio.activarUsuario(usuarioServicio.findById(id));
+
+
+        return "redirect:/admin/alumnos/";
     }
 
 }

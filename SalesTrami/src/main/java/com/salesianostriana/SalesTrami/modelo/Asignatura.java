@@ -34,10 +34,15 @@ public class Asignatura {
     @ManyToOne
     private Curso curso;
 
+
     @ManyToMany
+    @JoinTable(
+            joinColumns = @JoinColumn(name="asignatura_id"),
+            inverseJoinColumns = @JoinColumn(name="horario_id")
+    )
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private List<Horario> horarios;
+    private List<Horario> horarios = new ArrayList<>();
 
     private Boolean activo = true;
 

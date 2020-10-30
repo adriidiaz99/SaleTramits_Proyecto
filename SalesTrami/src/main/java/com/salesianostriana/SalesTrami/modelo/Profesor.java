@@ -39,4 +39,9 @@ public class Profesor extends Usuario {
         super(nombre, apellido1, apellido2, email, fechaNacimiento, username, password, numeroTelefono, direccion);
         this.isJefeEstudios = isJefeEstudios;
     }
+
+    @Override
+    public boolean isEnabled() {
+        return super.isEnabled();
+    }
 }

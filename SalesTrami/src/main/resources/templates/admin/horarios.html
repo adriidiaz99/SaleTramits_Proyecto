@@ -357,6 +357,7 @@
                     <th scope="col">Visualizar horario</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -366,6 +367,7 @@
                     <td th:unless="${calendario.curso} == null" th:text="${calendario.curso.nombre}">Sin especificar</td>
                     <td th:text="${calendario.activo} ? 'Horario activo' : 'Curso no activo'">efqwefrfe</td>
                     <td><a><button>Ver</button></a></td>
+                    <td><a th:href="@{../rellenar-horario/{id}(id = ${calendario.id})}"><button>Rellenar</button></a></td>
                     <td><a th:href="@{../editar-horario/{id}(id = ${calendario.id})}"><button>Editar</button></a></td>
                     <td><a th:href="@{../eliminar-horario/{id}(id = ${calendario.id})}"><button>Eliminar horario</button></a></td>
                   </tr>

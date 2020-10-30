@@ -1,9 +1,7 @@
 package com.salesianostriana.SalesTrami;
 
-import com.salesianostriana.SalesTrami.modelo.Asignatura;
-import com.salesianostriana.SalesTrami.modelo.Curso;
-import com.salesianostriana.SalesTrami.modelo.Profesor;
-import com.salesianostriana.SalesTrami.modelo.Titulo;
+import com.salesianostriana.SalesTrami.modelo.*;
+import com.salesianostriana.SalesTrami.servicio.AsignaturaServicio;
 import com.salesianostriana.SalesTrami.servicio.CursoServicio;
 import com.salesianostriana.SalesTrami.servicio.TituloServicio;
 import com.salesianostriana.SalesTrami.servicio.UsuarioServicio;
@@ -23,7 +21,7 @@ public class SalesTramiApplication {
 	}
 
 	@Bean
-	CommandLineRunner initData(UsuarioServicio servicioUsuario, CursoServicio curso, TituloServicio t1) {
+	CommandLineRunner initData(UsuarioServicio servicioUsuario, CursoServicio curso, TituloServicio t1, AsignaturaServicio a1) {
 
 		return args -> {
 
@@ -37,7 +35,9 @@ public class SalesTramiApplication {
 			System.out.println(c1);
 
 			servicioUsuario.save(new Profesor("LOLO", "Lolo", "Lolo", "lolo@lolo.com", LocalDate.now(), "admin", "1234", "53672728176", "WolaWola", true, true));
+			servicioUsuario.save(new Alumno("UU", "UU", "UU", "UU@UU.com", LocalDate.now(), "UU", "1234", "53672728176", "WolaWola", true));
 			curso.save(c1);
+			a1.save(new Asignatura("Hora libre", "Hora libre de asignatura"));
 		};
 	}
 }

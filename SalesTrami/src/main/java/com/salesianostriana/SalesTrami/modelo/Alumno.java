@@ -47,4 +47,8 @@ public class Alumno extends Usuario{
         c.getAlumnos().remove(this);
     }
 
+    @Override
+    public boolean isEnabled() {
+        return super.isEnabled();
+    }
 }

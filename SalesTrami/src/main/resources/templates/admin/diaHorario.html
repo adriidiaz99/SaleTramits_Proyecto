@@ -353,26 +353,25 @@
 
                     <div class="alCentro">
                         <form th:object="${calendario}" method="POST" enctype="multipart/form-data"
-                            th:action="${calendario.id} == 0 ? @{/admin/anyadir-horario/submit} : @{/admin/editar-horario/submit}">
+                              th:action="@{/admin/rellenar-horario/submit}">
 
                             <input type="number" th:field="*{id}" class="form-control invisible" id="id"
-                                   placeholder="Id del horario" >
+                                   placeholder="Id del horario">
 
-                            <div class="form-group">
-                                <label for="curso">Introduzca el curso al que programar el horario:</label>
-                                <select name="curso" id="curso" th:field="*{curso.id}">
-                                    <option th:each="curso : ${cursos}" th:value="${curso.id}" th:text="${curso.nombre}">Volvo</option>
-                                </select>
-                            </div>
+                            <input type="text" th:field="*{curso}" class="form-control invisible" id="id"
+                                   placeholder="Id del horario">
 
-                            <div class="form-group" th:each="dia : ${calendario.semana}">
+                            <div class="form-group" th:each="dia, itemStat : *{semana}">
+                                <input type="text" class="" th:field="*{semana[__${itemStat.index}__]}">
                                 <label for="lunes">Introduzca el curso al que programar el horario:</label>
-                                <select name="lunes" th:each="hora : ${dia.listaAsignaturas}" id="lunes" th:field="*{id}">
-                                    <option th:each="asignatura : ${asignaturas}" th:value="${asignatura.id}" th:text="${asignatura.nombre}">Volvo</option>
-                                </select>
+                                <div th:each="hora, formStat : *{semana[__${itemStat.index}__].listaAsignaturas}">
+                                    <select name="lunes" id="lunes" th:field="*{semana[__${itemStat.index}__].listaAsignaturas[__${formStat.index}__]}">
+                                        <option th:each="asignatura : ${asignaturas}" th:value="${asignatura.id}" th:text="${asignatura.nombre}">Volvo</option>
+                                    </select>
+                                </div>
                             </div>
-                            
-                            <button type="submit" class="btn btn-primary">Agregar</button>  
+
+                            <button type="submit" class="btn btn-primary">Agregar</button>
                         </form>
 
                     </div>
