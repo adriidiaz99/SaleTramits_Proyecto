@@ -79,7 +79,7 @@ public class UsuarioServicio extends BaseServiceImpl<Usuario, Long, UsuarioRepos
         usuario.setPassword(codified);
 
         System.out.println(codified);
-        /*emailService.sendMail(usuario.getEmail(), "Bienvenido a SaleTramits", "Su usuario es " +usuario.getUsername() +" y su contraseña " +codified);*/
+        emailService.sendMail(usuario.getEmail(), "Bienvenido a SaleTramits", "Su usuario es " +usuario.getUsername() +" y su contraseña " +codified);
 
         usuario.setPassword(b1.encode(usuario.getPassword()));
 

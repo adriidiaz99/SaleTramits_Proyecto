@@ -102,8 +102,6 @@ public class AdminController {
         alumno.addCurso(c1);
 
         usuarioServicio.saveSinPassword(alumno);
-
-        System.out.println(usuarioServicio.findAll());
         return "redirect:/admin/alumnos/";
     }
 
@@ -140,7 +138,6 @@ public class AdminController {
                 asignaturaServicio.edit(asignaturaServicio.encontrarPorNombre("Hora libre"));
             }
             calendarioServicio.edit(calendario);
-            System.out.println(calendario);
         /*}*/
 
         return "redirect:/admin/horarios/";
@@ -190,6 +187,7 @@ public class AdminController {
 
         return "redirect:/admin/horarios/";
     }
+
 
     @GetMapping("/completar-horario/")
     public String completarHorario(Model model){

@@ -362,7 +362,7 @@
                                    placeholder="Id del horario">
 
                             <div class="form-group" th:each="dia, itemStat : *{semana}">
-                                <input type="text" class="" th:field="*{semana[__${itemStat.index}__]}">
+                                <input type="text" class="invisible" th:field="*{semana[__${itemStat.index}__]}">
                                 <label for="lunes">Introduzca el curso al que programar el horario:</label>
                                 <div th:each="hora, formStat : *{semana[__${itemStat.index}__].listaAsignaturas}">
                                     <select name="lunes" id="lunes" th:field="*{semana[__${itemStat.index}__].listaAsignaturas[__${formStat.index}__]}">

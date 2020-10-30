@@ -25,8 +25,9 @@ public class SalesTramiApplication {
 
 		return args -> {
 
-			Titulo t2 = new Titulo("EE", "OO");
-			Curso c1 = new Curso("Hola", "Ei");
+			Titulo t2 = new Titulo("DAM", "Desarrollo de aplicaciones");
+			Curso c1 = new Curso("1ºDAM", "vfdsvsdfvf");
+			Curso c2 = new Curso("2ºDAM", "vfdsvsdfvf");
 
 			t1.save(t2);
 			t2.addCurso(c1);
