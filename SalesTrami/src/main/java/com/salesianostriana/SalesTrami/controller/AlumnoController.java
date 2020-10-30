@@ -30,9 +30,11 @@ public class AlumnoController {
         Usuario usuario;
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetail = (UserDetails) auth.getPrincipal();
-        usuario = ((Alumno)this.usuarioServicio.buscarUsuarioPorUsername(userDetail.getUsername()));
+        usuario = (this.usuarioServicio.buscarAlumnoPorUsername(userDetail.getUsername()));
 
-        Calendario calendario = calendarioServicio.encontrarCalendarioPorCurso(((Alumno)usuarioServicio.findById(usuario.getId())).getCurso().getId());
+        System.out.println(calendarioServicio.findAll());
+
+        Calendario calendario = calendarioServicio.encontrarCalendarioPorCurso(usuarioServicio.encontrarAlumnoPorId(usuario.getId()).getCurso().getId());
         Calendario c2 = new Calendario();
 
         for(int i = 0; i < 6 ; i++){
@@ -44,9 +46,8 @@ public class AlumnoController {
 
         for(int i = 0; i < calendario.getSemana().size(); i++){
 
-
-
             for(int j = 0; j < calendario.getSemana().get(i).getListaAsignaturas().size(); j++){
+
                 Asignatura a2 = calendario.getSemana().get(j).getListaAsignaturas().get(i);
 
                 c2.getSemana().get(j).getListaAsignaturas().set(i, a2);
@@ -55,6 +56,8 @@ public class AlumnoController {
 
 
         }
+
+        System.out.println(c2);
 
         model.addAttribute("alumno", usuario);
         model.addAttribute("horario", c2);

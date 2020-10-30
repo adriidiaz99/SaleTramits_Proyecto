@@ -336,7 +336,7 @@
                   </tr>
                 </thead>
                 <tbody th:object="${calendario}">
-                  <tr th:each="semana , inputCheat : ${calendario.semana}">
+                  <tr th:each="extranyo , inputCheat : ${calendario.semana}">
                     <td th:each="hora , inputCheat2 : ${calendario.semana[__${inputCheat.index}__].listaAsignatura}" th:text="${calendario.semana[__${inputCheat.index}__].listaAsignatura[__${inputCheat2.index}__].nombre}"></td>
                   </tr>
                 </tbody>

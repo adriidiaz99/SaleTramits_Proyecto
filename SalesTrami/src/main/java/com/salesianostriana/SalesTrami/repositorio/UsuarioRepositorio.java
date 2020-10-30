@@ -16,6 +16,11 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
 
     Optional<Usuario> findFirstByUsername(String username);
 
+    @Query(value = "SELECT * FROM USUARIO JOIN ALUMNO USING (ID) WHERE USERNAME = ?1", nativeQuery = true)
+    Optional<Alumno> encontrarAlumnoPorUserName(String username);
+
+    Optional<Alumno> findFirstById(long id);
+
     @Query(value = "SELECT * FROM USUARIO JOIN ALUMNO USING (ID)", nativeQuery = true)
     List<Alumno> encontrarUsuariosAlumnos();
 

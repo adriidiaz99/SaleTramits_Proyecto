@@ -128,13 +128,14 @@ public class AdminController {
         }
         }*/
 
+        calendarioServicio.save(calendario);
+
         /*if(comprobar){*/
             for(int i = 0; i < 6 ; i++){
                 calendario.addHorario(new Horario());
                 for(int j = 0; j < 6; j++){
                     calendario.getSemana().get(i).addAsignatura(asignaturaServicio.encontrarPorNombre("Hora libre"));
                 }
-
                 horarioServicio.edit(calendario.getSemana().get(i));
                 asignaturaServicio.edit(asignaturaServicio.encontrarPorNombre("Hora libre"));
             }
@@ -150,16 +151,42 @@ public class AdminController {
     public String anyadirHorarioPostSubmit(@ModelAttribute Calendario calendario){
 
 
-        for(Horario horario : calendario.getSemana()){
-            for(Asignatura a1 : horarioServicio.findById(horario.getId()).getListaAsignaturas()){
-                horario.removeAsignatura(a1);
-                horarioServicio.edit(horario);
+        Calendario c1 = calendarioServicio.findById(calendario.getId());
+
+        System.out.println(calendario);
+
+        for(int i = 0; i < 6 ; i++){
+
+            horarioServicio.edit(calendario.getSemana().get(i));
+
+            for(int j = 0; j < 6; j++){
+                Asignatura a1 = asignaturaServicio.findById(c1.getSemana().get(i).getListaAsignaturas().get(j).getId());
+                a1.getHorarios().remove(c1.getSemana().get(i));
                 asignaturaServicio.edit(a1);
             }
         }
 
-        System.out.println(calendario);
-        calendarioServicio.edit(calendario);
+        for(int i = 0; i < 6 ; i++){
+
+            for(int j = 0; j < 6; j++){
+                asignaturaServicio.findById(calendario.getSemana().get(i).getListaAsignaturas().get(j).getId());
+                c1.getSemana().get(i).getListaAsignaturas().set(j, asignaturaServicio.findById(calendario.getSemana().get(i).getListaAsignaturas().get(j).getId()));
+                c1.getSemana().get(i).getListaAsignaturas().get(j).getHorarios().add(c1.getSemana().get(i));
+
+
+                asignaturaServicio.edit(c1.getSemana().get(i).getListaAsignaturas().get(j));
+            }
+
+            horarioServicio.edit(calendario.getSemana().get(i));
+        }
+
+        cursoServicio.edit(c1.getCurso());
+
+        calendarioServicio.edit(c1);
+
+        System.out.println(horarioServicio.findAll());
+        System.out.println(asignaturaServicio.findAll());
+        System.out.println(calendarioServicio.findAll());
 
         return "redirect:/admin/horarios/";
     }

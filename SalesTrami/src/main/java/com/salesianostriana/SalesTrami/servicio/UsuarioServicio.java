@@ -31,8 +31,16 @@ public class UsuarioServicio extends BaseServiceImpl<Usuario, Long, UsuarioRepos
         super(repo);
     }
 
+    public Alumno encontrarAlumnoPorId(long id){
+        return repositorio.findFirstById(id).orElseThrow(() -> new NullPointerException());
+    }
+
     public Usuario buscarUsuarioPorUsername(String username){
         return repositorio.findFirstByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
+    }
+
+    public Alumno buscarAlumnoPorUsername(String username){
+        return repositorio.encontrarAlumnoPorUserName(username).orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
     }
 
     public List<Alumno> buscarTodosLosAlumnos(){ return repositorio.encontrarUsuariosAlumnos();}

@@ -34,9 +34,18 @@ public class SalesTramiApplication {
 			System.out.println(t2);
 			System.out.println(c1);
 
-			servicioUsuario.save(new Profesor("LOLO", "Lolo", "Lolo", "lolo@lolo.com", LocalDate.now(), "admin", "1234", "53672728176", "WolaWola", true, true));
-			servicioUsuario.save(new Alumno("UU", "UU", "UU", "UU@UU.com", LocalDate.now(), "UU", "1234", "53672728176", "WolaWola", true));
+
+
+			Alumno al1 = new Alumno("UU", "UU", "UU", "UU@UU.com", LocalDate.now(), "UU", "1234", "53672728176", "WolaWola", true);
+
+				al1.addCurso(c1);
+
 			curso.save(c1);
+
+			servicioUsuario.save(al1);
+
+			servicioUsuario.save(new Profesor("LOLO", "Lolo", "Lolo", "lolo@lolo.com", LocalDate.now(), "admin", "1234", "53672728176", "WolaWola", true, true));
+			//servicioUsuario.save(new Alumno("UU", "UU", "UU", "UU@UU.com", LocalDate.now(), "UU", "1234", "53672728176", "WolaWola", true));
 			a1.save(new Asignatura("Hora libre", "Hora libre de asignatura"));
 		};
 	}
